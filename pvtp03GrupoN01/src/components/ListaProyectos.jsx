@@ -28,7 +28,7 @@ return (
             placeholder="Buscar proyecto"
             onChange={manejarBuscar}
         />
-        {/* lista dinamica */}
+        {/* lista dinamicaa */}
             {
             proyectos.map((proyecto) => (
                 <article key={proyecto.id}>
