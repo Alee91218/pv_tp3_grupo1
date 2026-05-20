@@ -12,7 +12,7 @@ const DetalleProyecto = ({ proyecto, cerrar }) => { //recibe el proyecto y una f
     } = proyecto;
 
     return (
-        <section>
+        <section className="detalle-proyecto">
 
             <h2>{titulo}</h2>
 
