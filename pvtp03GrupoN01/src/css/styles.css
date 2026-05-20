@@ -100,7 +100,89 @@ main {
     margin-top: 30px;
 }
 
+
+.proyectos-container {
+  
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center; 
+
+    gap: 30px; 
+
+    margin-top: 20px;
+
+}
+
+
+
+.proyectos-container article {
+
+    width: 300px;
+
+    margin: 0; 
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center; 
+
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+
+.form-proyecto {
+    background-color: rgb(147, 148, 216);
+    padding: 25px;
+    border-radius: 10px;
+    width: 400px;
+    margin: 0 auto 30px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.form-proyecto h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.form-proyecto input[type="text"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-proyecto label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+}
+
+.form-proyecto button {
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #7ea0a5;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-proyecto button:hover {
+    background-color: hsl(188, 22%, 48%);
+}
+
 .detalle-proyecto h2 {
     text-align: center;
 }
+
 
