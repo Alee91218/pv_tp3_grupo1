@@ -1,12 +1,12 @@
-import ListaProyectos from './components/ListaProyectos'
-import Header from './components/Header' // 
-import Footer from './components/Footer' //
+import Header from './components/Header' 
+import Footer from './components/Footer' 
+import Proyectos from './components/Proyecto'
 function App() {
   return (
     <>
     <Header />
     <main>  
-      <ListaProyectos />
+      <Proyectos />
     </main>
     <Footer />
     </>
