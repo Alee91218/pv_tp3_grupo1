@@ -33,7 +33,7 @@ const Proyectos = () => {
             />
 
             <DetalleProyecto
-                usuario={ proyectoSeleccionado }
+                proyecto={ proyectoSeleccionado } //cambio usuario por proyecto
                 cerrar={ manejarCerrarDetalle }
             />
         </>
