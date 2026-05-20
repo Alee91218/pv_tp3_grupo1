@@ -1,4 +1,4 @@
-import '../css/styles.css'
+
 import { useState } from "react";
 import proyectService from "../services/proyectoService.js";
 import FormProyecto from "./FormProyecto.jsx"
