@@ -186,3 +186,33 @@ main {
 }
 
 
+/* Estilo base del botón */
+.boton-accion {
+  background-color: #ffffff;
+  color: #e60000; /* Un rojo intenso y clásico */
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 8px 20px;
+  border: 2px solid #e60000;
+  border-radius: 6px;
+  cursor: pointer;
+  /* Transición suave para todos los cambios */
+  transition: all 0.3s ease; 
+  /* Sombra sutil para darle profundidad */
+  box-shadow: 0 4px 6px rgba(230, 0, 0, 0.1);
+}
+
+/* Efecto Hover (cuando el mouse pasa por encima) */
+.boton-accion:hover {
+  background-color: #e60000;
+  color: #ffffff;
+  /* La sombra crece y el botón "sube" un poquito */
+  box-shadow: 0 6px 12px rgba(230, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Efecto Active (cuando haces click) */
+.boton-accion:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(230, 0, 0, 0.1);
+}

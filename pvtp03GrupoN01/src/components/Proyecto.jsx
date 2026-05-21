@@ -6,46 +6,38 @@ import DetalleProyecto from "./DetalleProyecto.jsx"
 
 const Proyectos = () => {
     const [proyectos, setProyectos] = useState(proyectService.obtenerProyectos());
-    const [proyectoSeleccionado, setproyectoSeleccionado] = useState(null);
-
+    const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
+    console.log(proyectos);
     const manejarEnvio = (proyectoDelFormulario) => {
         proyectService.agregarProyecto(proyectoDelFormulario);
         setProyectos(proyectService.obtenerProyectos());
+        
     };
 
     const manejarVerDetalle = (proyecto) => {
-        setproyectoSeleccionado(proyecto);
+        setProyectoSeleccionado(proyecto);
     };
 
     const manejarCerrarDetalle = () => {
-        setproyectoSeleccionado(null);
+        setProyectoSeleccionado(null);
     };
 
-    // CAMBIO IMPORTANTE: Nueva función para eliminar conectada al estado principal de React
-    const manejarEliminar = (id) => {
-        proyectService.eliminarProyecto(id);
-        setProyectos(proyectService.obtenerProyectos()); 
-    };
 
-    // CAMBIO IMPORTANTE: Nueva función para capturar la búsqueda y filtrar dinámicamente
-    const manejarBuscar = (texto) => {
-        if (texto.trim() === '') {
-            setProyectos(proyectService.obtenerProyectos());
-        } else {
-            setProyectos(proyectService.buscarProyecto(texto));
-        }
-    };
+     //eliminar proyecto
+  const manejarEliminar = (id) => {
+    proyectService.eliminarProyecto(id);
+    setProyectos(proyectService.obtenerProyectos()); // actualiza la list
+  };
+
 
     return (
         <>
             <FormProyecto agregarProyecto={ manejarEnvio } />
 
-            {/* CAMBIO IMPORTANTE: Pasamos las funciones onEliminar y onBuscar como props al listado */}
             <ListProject
                 proyectos={ proyectos }
                 verDetalle={ manejarVerDetalle }
-                onEliminar={ manejarEliminar }
-                onBuscar={ manejarBuscar }
+                eliminarProyecto={ manejarEliminar}
             />
 
             <DetalleProyecto
