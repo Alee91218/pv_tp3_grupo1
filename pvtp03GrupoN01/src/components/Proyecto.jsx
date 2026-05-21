@@ -7,21 +7,27 @@ import DetalleProyecto from "./DetalleProyecto.jsx"
 
 const Proyectos = () => {
     const [proyectos, setProyectos] = useState(proyectService.obtenerProyectos());
-    const [proyectoSeleccionado, setproyectoSeleccionado] = useState(null);
-
+    const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
+    console.log(proyectos);
     const manejarEnvio = (proyectoDelFormulario) => {
         proyectService.agregarProyecto(proyectoDelFormulario);
         setProyectos(proyectService.obtenerProyectos());
-        console.log(proyectos);
+        
     };
 
     const manejarVerDetalle = (proyecto) => {
-        setproyectoSeleccionado(proyecto);
+        setProyectoSeleccionado(proyecto);
     };
 
     const manejarCerrarDetalle = () => {
-        setproyectoSeleccionado(null);
+        setProyectoSeleccionado(null);
     };
+
+     //eliminar proyecto
+  const manejarEliminar = (id) => {
+    proyectService.eliminarProyecto(id);
+    setProyectos(proyectService.obtenerProyectos()); // actualiza la list
+  };
 
     return (
         <>
@@ -30,6 +36,7 @@ const Proyectos = () => {
             <ListProject
                 proyectos={ proyectos }
                 verDetalle={ manejarVerDetalle }
+                eliminarProyecto={ manejarEliminar}
             />
 
             <DetalleProyecto

@@ -1,7 +1,7 @@
 
 import CardProject from "./ProyectoCard.jsx";
 
-const ListProject = ({ proyectos, verDetalle}) => {
+const ListProject = ({ proyectos, verDetalle,eliminarProyecto}) => {
   if(proyectos.length === 0) return <p>No hay proyectos registrados</p>
 
   return (
@@ -10,6 +10,7 @@ const ListProject = ({ proyectos, verDetalle}) => {
                 <CardProject
                     key={proyecto.id}
                     proyecto={proyecto}
+                    eliminarProyecto={eliminarProyecto}
                     verDetalle={verDetalle}
                 />
             ))}
