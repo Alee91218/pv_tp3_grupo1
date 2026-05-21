@@ -12,4 +12,4 @@ La aplicaion permite:
 -Visualizar proyectos
 -Agregar proyectos
 -Eliminar proyectos
--Buscar proyectos
+-Buscar proyectos (No pudimos completar esta funcionalidad debido a errores ocasionados a ultimo momento por nuestro compañero Leandro , tomamos la decision de invertir el tiempo en el correcto funcionamiento de las demas funciones)
