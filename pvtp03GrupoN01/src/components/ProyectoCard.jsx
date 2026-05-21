@@ -15,6 +15,7 @@ const CardProject = ({ proyecto, verDetalle,eliminarProyecto }) => {
             >
                 Ver Detalles
             </button>
+
         </article>
     );
 };

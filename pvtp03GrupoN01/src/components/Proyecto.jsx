@@ -1,8 +1,7 @@
-
 import { useState } from "react";
 import proyectService from "../services/proyectoService.js";
 import FormProyecto from "./FormProyecto.jsx"
-import ListProject from "./ListaProyectos.jsx";
+import ListProject from "./ListaProyectos.jsx"; 
 import DetalleProyecto from "./DetalleProyecto.jsx"
 
 const Proyectos = () => {
@@ -23,11 +22,13 @@ const Proyectos = () => {
         setProyectoSeleccionado(null);
     };
 
+
      //eliminar proyecto
   const manejarEliminar = (id) => {
     proyectService.eliminarProyecto(id);
     setProyectos(proyectService.obtenerProyectos()); // actualiza la list
   };
+
 
     return (
         <>
@@ -40,7 +41,7 @@ const Proyectos = () => {
             />
 
             <DetalleProyecto
-                proyecto={ proyectoSeleccionado } //cambio usuario por proyecto
+                proyecto={ proyectoSeleccionado } 
                 cerrar={ manejarCerrarDetalle }
             />
         </>

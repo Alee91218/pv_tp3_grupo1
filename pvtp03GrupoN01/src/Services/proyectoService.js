@@ -1,4 +1,5 @@
 const proyectService = (() => {
+  
   let proyectos = [
     {
       id: 1,
@@ -96,6 +97,7 @@ const proyectService = (() => {
     eliminarProyecto,
     buscarProyecto,
   };
+
 })();
 
 export default proyectService;
