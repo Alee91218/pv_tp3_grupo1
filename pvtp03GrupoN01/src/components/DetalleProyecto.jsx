@@ -1,32 +1,65 @@
 const DetalleProyecto = ({ proyecto, cerrar }) => {
-  //recibe el proyecto y una funcion para cerrar el detalle
-
   if (!proyecto) {
     return null;
   }
-
- /* const { titulo, descripcion, estado, categoria, recursos, equipo } = proyecto;*/
 
   return (
     <div className="detalle-overlay">
       <div className="detalle-contenedor">
         <h2>{proyecto.titulo}</h2>
-        <p><strong>Categoría:</strong> {proyecto.categoria}</p>
-        <p><strong>Descripcion:</strong> {proyecto.descripcion}</p>
-        <p><strong>Recursos:</strong></p>
-        <li>{proyecto.pdf}</li>
-        <li>{proyecto.drive}</li>
-        <li>{proyecto.github}</li>
-        <p><strong>Equipo:</strong></p>
-        <li>{proyecto.integrante1}</li>
-        <p><strong>Rol: </strong>{proyecto.rol1}</p>
-         <li>{proyecto.integrante2}</li>
-        <p><strong>Rol: </strong>{proyecto.rol2}</p>
-        <p><strong>Estado:</strong> {proyecto.estado ? 'En Curso' : 'En Terminado'}</p>
-        <button onClick={cerrar}>
-                Cerrar
-            </button>
+
+        <p>
+          <strong>Categoría:</strong> {proyecto.categoria}
+        </p>
+
+        <p>
+          <strong>Descripción:</strong>
+        </p>
+
+        {Array.isArray(proyecto.descripcion) ? (
+          proyecto.descripcion.map((texto, index) => <p key={index}>{texto}</p>)
+        ) : (
+          <p>{proyecto.descripcion}</p>
+        )}
+
+        <h3>Recursos</h3>
+
+        <ul>
+          <li>
+            <a href={proyecto.recursos?.pdf}>PDF</a>
+          </li>
+
+          <li>
+            <a href={proyecto.recursos?.drive}>Drive</a>
+          </li>
+
+          <li>
+            <a href={proyecto.recursos?.github}>GitHub</a>
+          </li>
+        </ul>
+
+        <h3>Equipo</h3>
+
+        <ul>
+          {proyecto.equipo?.map((persona, index) => (
+            <li key={index}>
+              <strong>{persona.nombre}</strong>
+              {" - "}
+              {persona.rol}
+            </li>
+          ))}
+        </ul>
+
+        <p>
+          <strong>Estado:</strong> {proyecto.estado ? "En Curso" : "Terminado"}
+        </p>
+
+        <button className="boton-cerrar" onClick={cerrar}>
+          Cerrar
+        </button>
       </div>
     </div>
-)};
+  );
+};
+
 export default DetalleProyecto;

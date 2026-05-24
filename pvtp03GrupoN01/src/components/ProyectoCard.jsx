@@ -4,9 +4,16 @@ const CardProject = ({ proyecto, verDetalle,eliminarProyecto }) => {
     return (
         <article className="tarjeta">
             <h3>{titulo}</h3>
-            <p>{categoria}</p>
-            <p>{estado ? 'En curso' : 'Terminado'}</p>
-            <button onClick={() => eliminarProyecto(id)}>
+            <p>
+                <strong>Categoría:</strong> {categoria}
+            </p>
+           <p>
+                <strong>Estado:</strong> {estado ? 'En curso' : 'Terminado'}
+            </p>
+            <button 
+                className="boton-eliminar"
+                onClick={() => eliminarProyecto(id)}
+            >
                 Eliminar
             </button>
             <button 
