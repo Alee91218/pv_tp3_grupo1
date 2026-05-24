@@ -6,6 +6,7 @@ const proyectService = (() => {
       titulo: "Plataforma Educativa",
       categoria: "Programación",
       estado: true,
+      activo: true, // <-- Agregado para baja lógica
       descripcion: `La plataforma educativa permite administrar cursos, estudiantes y contenidos de manera organizada. Los docentes pueden cargar materiales, actividades y evaluaciones para facilitar el aprendizaje. Ademas , los estudiantes pueden acceder al contenido desde cualquier dispositivo, realizar entregas online y comunicarse con sus profesores mediante herramientas integradas.`,
       pdf: `https://ejemplo.com/plataformaeducativa.pdf`,
       drive: `https://drive.google.com/`,
@@ -20,6 +21,7 @@ const proyectService = (() => {
       titulo: "App de Tareas",
       categoria: "Productividad",
       estado: false,
+      activo: true, // <-- Agregado para baja lógica
       descripcion: `La aplicacion ayuda a los estudiantes a organizar tareas, trabajos practicos y examenes en un solo lugar. Incluye recordatorios automaticos,categorias personalizadas y seguimiento del progreso academico.`,
       pdf: `https://ejemplo.com/tareas.pdf`,
       drive: `https://drive.google.com/`,
@@ -34,6 +36,7 @@ const proyectService = (() => {
       titulo: "Huerto Escolar",
       categoria: "Biología",
       estado: false,
+      activo: true, // <-- Agregado para baja lógica
       descripcion: `El proyecto de huerto escolar busca enseñar a los estudiantes sobre cultivo sostenible, cuidado ambiental y alimentacion saludable mediante actividades practicas. Los alumnos participan en la preparacion de la tierra,plantacion y mantenimiento de cultivos,desarrollando trabajo en equipo y conciencia ecologica.`,
       pdf: `https://ejemplo.com/huerta.pdf`,
       drive: `https://drive.google.com/`,
@@ -48,6 +51,7 @@ const proyectService = (() => {
       titulo: "Robótica Educativa",
       categoria: "Ingeniería",
       estado: true,
+      activo: true, // <-- Agregado para baja lógica
       descripcion: `El proyecto de robotica educativa introduce a los estudiantes en conceptos de programacion y automatizacion utilizando kits electronicos y sensores. Los participantes diseñan y programan robots capaces de realizar tareas simples, fomentando la creatividad y el pensamiento logico.`,
       pdf: `https://ejemplo.com/robotica.pdf`,
       drive: `https://drive.google.com/`,
@@ -62,6 +66,7 @@ const proyectService = (() => {
       titulo: "Taller Deportivo",
       categoria: "Educacion Física",
       estado: false,
+      activo: true, // <-- Agregado para baja lógica
       descripcion: `El taller deportivo promueve la actividad fisica y el trabajo en equipo mediante distintas disciplinas deportivas adaptadas a los estudiantes. Ademas de mejorar la condicion fisica, el proyecto busca fortalecer valores como el compañerismo, la disciplina y el respeto.`,
       pdf: `https://ejemplo.com/deportivo.pdf`,
       drive: `https://drive.google.com/`,
@@ -78,19 +83,24 @@ const proyectService = (() => {
   };
 
   const agregarProyecto = (p) => {
-    const nuevoProyecto = { ...p, id: Date.now() };
+    // Cuando se crea un proyecto nuevo, nace con activo: true por defecto
+    const nuevoProyecto = { ...p, id: Date.now(), activo: true };
     proyectos.push(nuevoProyecto);
   };
 
+  // MODIFICADO: Ahora hace BAJA LÓGICA pasando la variable a falso
   const eliminarProyecto = (id) => {
-    proyectos = proyectos.filter((proyecto) => proyecto.id !== id);
+    proyectos = proyectos.map((proyecto) =>
+      proyecto.id === id ? { ...proyecto, activo: false } : proyecto
+    );
   };
 
   const buscarProyecto = (texto) => {
     return proyectos.filter((proyecto) =>
-      proyecto.titulo.toLowerCase().includes(texto.toLowerCase()),
+      proyecto.titulo.toLowerCase().includes(texto.toLowerCase())
     );
   };
+
   return {
     obtenerProyectos,
     agregarProyecto,
