@@ -25,19 +25,34 @@ const DetalleProyecto = ({ proyecto, cerrar }) => {
         <h3>Recursos</h3>
 
         <ul>
-          <li>
-            <a href={proyecto.recursos?.pdf}>PDF</a>
+            <li>
+              <a 
+                href={proyecto.recursos?.pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                PDF
+              </a>
           </li>
-
-          <li>
-            <a href={proyecto.recursos?.drive}>Drive</a>
+            <li>
+              <a 
+                href={proyecto.recursos?.drive}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Drive
+              </a>
           </li>
-
-          <li>
-            <a href={proyecto.recursos?.github}>GitHub</a>
+            <li>
+              <a 
+                href={proyecto.recursos?.github}
+                target="_blank"
+              rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
           </li>
         </ul>
-
         <h3>Equipo</h3>
 
         <ul>
