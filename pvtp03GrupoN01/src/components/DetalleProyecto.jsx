@@ -1,57 +1,80 @@
-const DetalleProyecto = ({ proyecto, cerrar }) => { //recibe el proyecto y una funcion para cerrar el detalle
+const DetalleProyecto = ({ proyecto, cerrar }) => {
+  if (!proyecto) {
+    return null;
+  }
 
-    if (!proyecto) {
-        return null;
-    }
+  return (
+    <div className="detalle-overlay">
+      <div className="detalle-contenedor">
+        <h2>{proyecto.titulo}</h2>
 
-    const {
-        titulo,
-        descripcion,
-        recursos,
-        equipo
-    } = proyecto;
+        <p>
+          <strong>Categoría:</strong> {proyecto.categoria}
+        </p>
 
-    return (
-        <section>
+        <p>
+          <strong>Descripción:</strong>
+        </p>
 
-            <h2>{titulo}</h2>
+        {Array.isArray(proyecto.descripcion) ? (
+          proyecto.descripcion.map((texto, index) => <p key={index}>{texto}</p>)
+        ) : (
+          <p>{proyecto.descripcion}</p>
+        )}
 
-            {descripcion.map((parrafo, index) => (
-                <p key={index}>{parrafo}</p>
-            ))}
+        <h3>Recursos</h3>
 
-            <h3>Recursos</h3>
+        <ul>
+            <li>
+              <a 
+                href={proyecto.recursos?.pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                PDF
+              </a>
+          </li>
+            <li>
+              <a 
+                href={proyecto.recursos?.drive}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Drive
+              </a>
+          </li>
+            <li>
+              <a 
+                href={proyecto.recursos?.github}
+                target="_blank"
+              rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+          </li>
+        </ul>
+        <h3>Equipo</h3>
 
-            <ul>
-                <li>
-                    <a href={recursos.pdf}>PDF</a>
-                </li>
+        <ul>
+          {proyecto.equipo?.map((persona, index) => (
+            <li key={index}>
+              <strong>{persona.nombre}</strong>
+              {" - "}
+              {persona.rol}
+            </li>
+          ))}
+        </ul>
 
-                <li>
-                    <a href={recursos.drive}>Drive</a>
-                </li>
+        <p>
+          <strong>Estado:</strong> {proyecto.estado ? "En Curso" : "Terminado"}
+        </p>
 
-                <li>
-                    <a href={recursos.github}>GitHub</a>
-                </li>
-            </ul>
-
-            <h3>Equipo</h3>
-
-            <ul>
-                {equipo.map((miembro, index) => (
-                    <li key={index}>
-                        {miembro.nombre} - {miembro.rol}
-                    </li>
-                ))}
-            </ul>
-
-            <button onClick={cerrar}>
-                Cerrar
-            </button>
-
-        </section>
-    );
+        <button className="boton-cerrar" onClick={cerrar}>
+          Cerrar
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default DetalleProyecto;
