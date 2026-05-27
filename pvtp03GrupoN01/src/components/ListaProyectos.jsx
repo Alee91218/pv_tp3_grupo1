@@ -8,7 +8,7 @@ const ListProject = ({ proyectos, verDetalle, eliminarProyecto }) => {
 
   // 2. useRef para crear la bandera (flag) y evitar la ejecución en la carga inicial
   const esCargaInicial = useRef(true);
-
+  const cantidadInicial = useRef(proyectos.length);
   // 3. useEffect que escucha SOLO los cambios en el arreglo de proyectos
   useEffect(() => {
     // Si es la primera vez que se monta el componente, cambiamos la bandera y no hacemos nada
@@ -16,13 +16,16 @@ const ListProject = ({ proyectos, verDetalle, eliminarProyecto }) => {
       esCargaInicial.current = false;
       return;
     }
-
+    if (proyectos.length === cantidadInicial.current) {
+      return;
+    }
     // Si no es la carga inicial, significa que se agregó o eliminó un proyecto
     const ahora = new Date();
     const fechaHoraFormateada = ahora.toLocaleString(); // Formato legible: DD/MM/AAAA, HH:MM:SS
     setFechaActualizacion(fechaHoraFormateada);
+    
 
-  }, [proyectos]); // Dependencia estricta: solo se dispara si cambia 'proyectos'
+  }, [proyectos.length]); // Dependencia estricta: solo se dispara si cambia 'proyectos'
 
   // Mantenemos tu validación intacta
   if (proyectos.length === 0) {
