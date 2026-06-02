@@ -2,6 +2,7 @@ import Header from './components/Header'
 import Footer from './components/Footer' 
 import Proyectos from './components/Proyecto'
 import { Routes, Route } from "react-router-dom";
+import PerfilUsuario from './views/PerfilUsuario';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
 
          <Route 
           path="/perfil"
-          element={<h1> perfil en construccion </h1> }
+          element={ <PerfilUsuario/> }
         />
 
          <Route 
