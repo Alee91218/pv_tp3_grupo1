@@ -1,12 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // CAMBIO LEANDRO: Importamos useNavigate para cambiar de ruta
 import proyectService from "../services/proyectoService.js";
 import FormProyecto from "./FormProyecto.jsx"
 import ListProject from "./ListaProyectos.jsx"; 
-import DetalleProyecto from "./DetalleProyecto.jsx"
 
 const Proyectos = () => {
     const [proyectos, setProyectos] = useState(proyectService.obtenerProyectos());
-    const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
+    const navigate = useNavigate(); // CAMBIO LEANDRO: Instanciamos el navegador de React Router
     
     // Estado para la búsqueda dinámica
     const [busqueda, setBusqueda] = useState("");
@@ -18,12 +18,9 @@ const Proyectos = () => {
         setProyectos(proyectService.obtenerProyectos());
     };
 
+    // CAMBIO LEANDRO: Ahora redirige a la ruta dinámica independiente en vez de abrir un estado modal
     const manejarVerDetalle = (proyecto) => {
-        setProyectoSeleccionado(proyecto);
-    };
-
-    const manejarCerrarDetalle = () => {
-        setProyectoSeleccionado(null);
+        navigate(`/proyectos/${proyecto.id}`);
     };
 
     // Eliminar proyecto (llama al servicio modificado y actualiza el estado de React)
@@ -68,10 +65,7 @@ const Proyectos = () => {
                 eliminarProyecto={ manejarEliminar }
             />
 
-            <DetalleProyecto
-                proyecto={ proyectoSeleccionado } 
-                cerrar={ manejarCerrarDetalle }
-            />
+            {/* CAMBIO LEANDRO: Se removió <DetalleProyecto /> de aquí porque ahora se renderiza de forma independiente mediante su propia ruta en App.jsx */}
         </>
     );
 };

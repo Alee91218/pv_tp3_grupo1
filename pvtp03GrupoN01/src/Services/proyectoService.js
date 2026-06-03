@@ -101,11 +101,17 @@ const proyectService = (() => {
     );
   };
 
+  // CAMBIO LEANDRO: Nueva función estructurada para obtener un único proyecto por ID para la ruta dinámica
+  const obtenerProyectoPorId = (id) => {
+    return proyectos.find((proyecto) => proyecto.id === Number(id));
+  };
+
   return {
     obtenerProyectos,
     agregarProyecto,
     eliminarProyecto,
     buscarProyecto,
+    obtenerProyectoPorId, // CAMBIO LEANDRO: Retornamos la función para que sea accesible externamente
   };
 
 })();

@@ -1,6 +1,5 @@
-
-const CardProject = ({ proyecto, verDetalle,eliminarProyecto }) => {
-    const { id,titulo,categoria,estado } = proyecto;
+const CardProject = ({ proyecto, verDetalle, eliminarProyecto }) => {
+    const { id, titulo, categoria, estado } = proyecto;
     return (
         <article className="tarjeta">
             <h3>{titulo}</h3>
@@ -16,9 +15,10 @@ const CardProject = ({ proyecto, verDetalle,eliminarProyecto }) => {
             >
                 Eliminar
             </button>
+            {/* Al hacer clic aquí, se ejecuta la nueva lógica de Leandro que te redirige a /proyectos/:id */}
             <button 
                 className="boton-accion" 
-                onClick = {() => verDetalle(proyecto)}
+                onClick={() => verDetalle(proyecto)}
             >
                 Ver Detalles
             </button>
