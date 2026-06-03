@@ -1,6 +1,29 @@
-const DetalleProyecto = ({ proyecto, cerrar }) => {
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import proyectService from "../Services/proyectoService";
+
+const DetalleProyecto = () => {
+  // CAMBIO LEANDRO: Captura el parámetro 'id' directo desde la URL del navegador usando useParams
+  const { id } = useParams(); 
+  const navigate = useNavigate();
+  const [proyecto, setProyecto] = useState(null);
+
+  // CAMBIO LEANDRO: Efecto para resolver la persistencia si el usuario refresca (F5) la página independiente
+  useEffect(() => {
+    const encontrado = proyectService.obtenerProyectoPorId(id);
+    setProyecto(encontrado);
+  }, [id]);
+
+  // Manejo de caso por si ingresan una ID inexistente o manual errónea en la barra de direcciones
   if (!proyecto) {
-    return null;
+    return (
+      <div className="detalle-contenedor" style={{ padding: "20px", textAlign: "center" }}>
+        <h2>Proyecto no encontrado</h2>
+        <button className="boton-cerrar" onClick={() => navigate("/proyectos")}>
+          Volver a Proyectos
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -15,62 +38,44 @@ const DetalleProyecto = ({ proyecto, cerrar }) => {
         <p>
           <strong>Descripción:</strong>
         </p>
-
-        {Array.isArray(proyecto.descripcion) ? (
-          proyecto.descripcion.map((texto, index) => <p key={index}>{texto}</p>)
-        ) : (
-          <p>{proyecto.descripcion}</p>
-        )}
+        <p>{proyecto.descripcion}</p>
 
         <h3>Recursos</h3>
-
         <ul>
-            <li>
-              <a 
-                href={proyecto.recursos?.pdf}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                PDF
-              </a>
+          <li>
+            <a href={proyecto.pdf} target="_blank" rel="noopener noreferrer">
+              PDF
+            </a>
           </li>
-            <li>
-              <a 
-                href={proyecto.recursos?.drive}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Drive
-              </a>
+          <li>
+            <a href={proyecto.drive} target="_blank" rel="noopener noreferrer">
+              Drive
+            </a>
           </li>
-            <li>
-              <a 
-                href={proyecto.recursos?.github}
-                target="_blank"
-              rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
+          <li>
+            <a href={proyecto.github} target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
           </li>
         </ul>
-        <h3>Equipo</h3>
 
+        <h3>Equipo</h3>
         <ul>
-          {proyecto.equipo?.map((persona, index) => (
-            <li key={index}>
-              <strong>{persona.nombre}</strong>
-              {" - "}
-              {persona.rol}
-            </li>
-          ))}
+          <li>
+            <strong>{proyecto.integrante1}</strong> - {proyecto.rol1}
+          </li>
+          <li>
+            <strong>{proyecto.integrante2}</strong> - {proyecto.rol2}
+          </li>
         </ul>
 
         <p>
           <strong>Estado:</strong> {proyecto.estado ? "En Curso" : "Terminado"}
         </p>
 
-        <button className="boton-cerrar" onClick={cerrar}>
-          Cerrar
+        {/* CAMBIO LEANDRO: Se reemplaza el prop 'cerrar' por navegación reactiva para volver a la ruta padre */}
+        <button className="boton-cerrar" onClick={() => navigate("/proyectos")}>
+          Volver
         </button>
       </div>
     </div>
