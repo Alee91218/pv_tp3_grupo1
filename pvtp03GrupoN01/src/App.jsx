@@ -1,9 +1,11 @@
 import Header from './components/Header' 
 import Footer from './components/Footer' 
 import Proyectos from './components/Proyecto'
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import PerfilUsuario from './views/PerfilUsuario';
+import Dashboard from './views/Dashboard';
 import DetalleProyecto from './components/DetalleProyecto'; // CAMBIO LEANDRO: Importación de tu sección independiente
+
 
 function App() {
   return (
@@ -11,11 +13,16 @@ function App() {
     <Header />
     <main>  
       <Routes>
-        <Route 
-          path="/dashboard"
-          element={<h1> dashboard en construccion </h1>}
+        <Route
+         path="/"
+         element={<Navigate to="/dashboard" />}
         />
 
+        <Route 
+          path="/dashboard"
+          element={<Dashboard/>}
+        />
+        
          <Route 
           path="/perfil"
           element={ <PerfilUsuario/> }
