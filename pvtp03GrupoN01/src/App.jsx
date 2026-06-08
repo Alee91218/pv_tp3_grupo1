@@ -5,6 +5,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import PerfilUsuario from './views/PerfilUsuario';
 import Dashboard from './views/Dashboard';
 import DetalleProyecto from './components/DetalleProyecto'; // CAMBIO LEANDRO: Importación de tu sección independiente
+import RutaProtegida from './components/RutasProtegidas';
 
 
 function App() {
@@ -25,7 +26,11 @@ function App() {
         
          <Route 
           path="/perfil"
-          element={ <PerfilUsuario/> }
+          element={ 
+            <RutaProtegida>
+              <PerfilUsuario/>
+            </RutaProtegida>
+          }
         />
 
          <Route 
