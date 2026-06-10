@@ -6,7 +6,7 @@ import PerfilUsuario from './views/PerfilUsuario';
 import Dashboard from './views/Dashboard';
 import DetalleProyecto from './components/DetalleProyecto'; // CAMBIO LEANDRO: Importación de tu sección independiente
 import RutaProtegida from './components/RutasProtegidas';
-
+import ErrorPage from '../src/views/ErrorPages'
 
 function App() {
   return (
@@ -42,6 +42,11 @@ function App() {
         <Route 
           path="/proyectos/:id"
           element={<DetalleProyecto />}
+        />
+
+        <Route 
+          path="*" 
+          element={<ErrorPage />} 
         />
       </Routes>
     </main>
