@@ -4,27 +4,42 @@ import Proyectos from './components/Proyecto'
 import { Routes, Route, Navigate } from "react-router-dom";
 import PerfilUsuario from './views/PerfilUsuario';
 import Dashboard from './views/Dashboard';
-import DetalleProyecto from './components/DetalleProyecto'; // CAMBIO LEANDRO: Importación de tu sección independiente
+import DetalleProyecto from './components/DetalleProyecto'; 
 import RutaProtegida from './components/RutasProtegidas';
-import ErrorPage from '../src/views/ErrorPages'
+import ErrorPage from '../src/views/ErrorPages';
+
+import Login from './components/Login'; 
+import { ProveedorAutorizaciones } from './context/UsuarioContext';
 
 function App() {
   return (
-    <>
+    <ProveedorAutorizaciones>
     <Header />
     <main>  
       <Routes>
         <Route
          path="/"
-         element={<Navigate to="/dashboard" />}
+         element={<Navigate to="/login" />}
         />
 
+        
+        <Route 
+          path="/login"
+          element={<Login />}
+        />
+
+        
         <Route 
           path="/dashboard"
-          element={<Dashboard/>}
+          element={
+            <RutaProtegida>
+              <Dashboard/>
+            </RutaProtegida>
+          }
         />
         
-         <Route 
+      
+        <Route 
           path="/perfil"
           element={ 
             <RutaProtegida>
@@ -33,15 +48,24 @@ function App() {
           }
         />
 
+        
          <Route 
           path="/proyectos"
-          element={<Proyectos />}
+          element={
+            <RutaProtegida>
+              <Proyectos />
+            </RutaProtegida>
+          }
         />
 
-        {/* CAMBIO LEANDRO: Nueva ruta dinámica independiente vinculada a /proyectos/:id */}
+        
         <Route 
           path="/proyectos/:id"
-          element={<DetalleProyecto />}
+          element={
+            <RutaProtegida>
+              <DetalleProyecto />
+            </RutaProtegida>
+          }
         />
 
         <Route 
@@ -51,7 +75,7 @@ function App() {
       </Routes>
     </main>
     <Footer />
-    </>
+    </ProveedorAutorizaciones>
   )
 }
 
