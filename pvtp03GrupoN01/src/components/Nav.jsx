@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-// 1. IMPORTANTE: Importamos el hook del contexto que armó tu grupo
+// 1. IMPORTANTE: Importamos el hook del contexto
 import { useAutorizaciones } from '../hook/useAutorizaciones'; 
 
 const Nav = () => {
