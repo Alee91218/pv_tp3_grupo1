@@ -11,7 +11,7 @@ const Login = () => {
     // Para el manejo de validaciones visuales de campos con Bootstrap
     const [erroresCampo, setErroresCampo] = useState({});
 
-    // Consumimos guardarSesion del contexto de tu grupo
+    // Consumimos guardarSesion del contexto
     const { guardarSesion } = useAutorizaciones();
     const navigate = useNavigate();
 
@@ -37,7 +37,6 @@ const Login = () => {
         if (!password.trim()) {
             errores.password = 'La contraseña es obligatoria';
         } else if (password.length < 5) { 
-            // Adaptado para aceptar las claves '12345' de tus usuarios de prueba
             errores.password = 'La contraseña debe tener al menos 5 caracteres';
         }
 
@@ -51,26 +50,16 @@ const Login = () => {
         const errores = validarForm(form);
         if (Object.keys(errores).length > 0) {
              setErroresCampo(errores);
-             return; 
+             return; //detiene el envio si hay errores 
         }
 
         setLoading(true);
         try {
-            // 1. Llamamos a la promesa de tu servicio simulado (tarda 800ms)
-            const respuestaBackend = await autorizacionesService.login(form.user, form.password);
             
-            // 2. Armamos el objeto con la estructura que exige la cátedra (nombre, dni, rol, institucion)
-            const usuarioParaContexto = {
-                nombre: respuestaBackend.nombre, // Toma 'Facundo', 'Alejandro', etc.
-                dni: "40123456", 
-                rol: "Alumno", 
-                institucion: "Facultad de Ingeniería - UNJU" 
-            };
-
-            // 3. Guardamos en el estado global (usuarioActivo) llamando a la función del contexto
-            guardarSesion(usuarioParaContexto);
+            const usuario = await autorizacionesService.login(form.user, form.password);
             
-            // 4. Redirigimos al Dashboard del proyecto
+            guardarSesion(usuario);
+            
             navigate('/dashboard');
         } catch (err) {
             setError(err.message);

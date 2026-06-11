@@ -15,13 +15,14 @@ const PerfilUsuario = () => {
   // Estados locales para controlar la edición y el formulario
   const [editando, setEditando] = useState(false);
   const [nombre, setNombre] = useState(usuarioActivo?.nombre || 'Alejandro Fernandez');
+  const [apellido, setApellido] = useState(usuarioActivo?.apellido || '');
   const [rol, setRol] = useState(usuarioActivo?.rol || 'Estudiante');
   const [institucion, setInstitucion] = useState(usuarioActivo?.institucion || 'Facultad de Ingeniería');
 
   // cambio Leandro: funcion actualizarPerfil que impacta inmediatamente en el contexto global
   const actualizarPerfil = (e) => {
     e.preventDefault();
-    const usuarioActualizado = { ...usuarioActivo, nombre, rol, institucion };
+    const usuarioActualizado = { ...usuarioActivo, nombre, apellido, rol, institucion };
     guardarSesion(usuarioActualizado);
     setEditando(false);
   };
@@ -51,6 +52,41 @@ const PerfilUsuario = () => {
                     onChange={(e) => setNombre(e.target.value)} 
                     disabled={!editando}
                     style={!editando ? { backgroundColor: 'transparent', color: '#eaf6fb', border: 'none', paddingLeft: 0 } : {}}
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label><strong>Apellido:</strong></Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={apellido}
+                    onChange={(e) => setApellido(e.target.value)}
+                    disabled={!editando}
+                    style={
+                      !editando
+                        ? {
+                            backgroundColor: 'transparent',
+                            color: '#eaf6fb',
+                            border: 'none',
+                            paddingLeft: 0
+                          }
+                        : {}
+                    }
+                  />
+                </Form.Group>   
+
+                <Form.Group className="mb-3">
+                  <Form.Label><strong>DNI:</strong></Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={usuarioActivo?.dni || ''}
+                    disabled
+                    style={{
+                      backgroundColor: 'transparent',
+                      color: '#eaf6fb',
+                      border: 'none',
+                      paddingLeft: 0
+                    }}
                   />
                 </Form.Group>
 
