@@ -6,7 +6,7 @@ const autorizacionesService = ( () => {
             {id: 2, nombre: 'Alejandro', apellido: 'Fernandez', user: 'AleeFer@gmail.com', password: '654321' },
             {id: 3, nombre: 'Leandro', apellido: 'Barea', user: 'LeaBar@gmail.com', password: '78910'  },
             {id: 4, nombre: 'Jhonatan', apellido: 'Chaile', user: 'Jimmy@gmail.com', password: 'H1234'  },
-            {id: 5, nombre: 'Franco', apellido: 'Ponce', user: 'FranPc@gmail.com', password: '12345'  } 
+            {id: 5, nombre: 'Franco', apellido: 'Ponce', user: 'Fran@gmail.com', password: '12345'  } 
     ]
     const login = (user, password) => {
         return new Promise((resolve, reject) => {
