@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import Header from './components/Header' 
 import Footer from './components/Footer' 
 import Proyectos from './components/Proyecto'
@@ -10,8 +11,12 @@ import ErrorPage from '../src/views/ErrorPages';
 
 import Login from './components/Login'; 
 import { ProveedorAutorizaciones } from './context/UsuarioContext';
+import proyectService from './services/proyectoService.js'; 
 
-function App() {
+const App = () => {
+  // Estado global para mantener los proyectos sincronizados en toda la app
+  const [listaProyectos, setListaProyectos] = useState(proyectService.obtenerProyectos());
+
   return (
     <ProveedorAutorizaciones>
     <Header />
@@ -22,23 +27,20 @@ function App() {
          element={<Navigate to="/login" />}
         />
 
-        
         <Route 
           path="/login"
           element={<Login />}
         />
 
-        
         <Route 
           path="/dashboard"
           element={
             <RutaProtegida>
-              <Dashboard/>
+              <Dashboard proyectos={listaProyectos} />
             </RutaProtegida>
           }
         />
         
-      
         <Route 
           path="/perfil"
           element={ 
@@ -48,17 +50,15 @@ function App() {
           }
         />
 
-        
          <Route 
           path="/proyectos"
           element={
             <RutaProtegida>
-              <Proyectos />
+              <Proyectos proyectos={listaProyectos} setProyectos={setListaProyectos} />
             </RutaProtegida>
           }
         />
 
-        
         <Route 
           path="/proyectos/:id"
           element={
@@ -79,4 +79,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
