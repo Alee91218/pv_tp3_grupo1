@@ -4,8 +4,7 @@ import proyectService from "../services/proyectoService.js";
 import FormProyecto from "./FormProyecto.jsx"
 import ListProject from "./ListaProyectos.jsx"; 
 
-const Proyectos = () => {
-    const [proyectos, setProyectos] = useState(proyectService.obtenerProyectos());
+const Proyectos = ({ proyectos = [], setProyectos }) => {
     const navigate = useNavigate(); // CAMBIO LEANDRO: Instanciamos el navegador de React Router
     
     // Estado para la búsqueda dinámica
@@ -15,7 +14,8 @@ const Proyectos = () => {
 
     const manejarEnvio = (proyectoDelFormulario) => {
         proyectService.agregarProyecto(proyectoDelFormulario);
-        setProyectos(proyectService.obtenerProyectos());
+        // Actualiza el estado de React de forma global con una nueva referencia ([...])
+        setProyectos([...proyectService.obtenerProyectos()]);
     };
 
     // CAMBIO LEANDRO: Ahora redirige a la ruta dinámica independiente en vez de abrir un estado modal
@@ -23,10 +23,10 @@ const Proyectos = () => {
         navigate(`/proyectos/${proyecto.id}`);
     };
 
-    // Eliminar proyecto (llama al servicio modificado y actualiza el estado de React)
+    // Eliminar proyecto (llama al servicio modificado y actualiza el estado de React globalmente)
     const manejarEliminar = (id) => {
         proyectService.eliminarProyecto(id);
-        setProyectos(proyectService.obtenerProyectos()); 
+        setProyectos([...proyectService.obtenerProyectos()]); 
     };
 
     // FILTRADO DINÁMICO: Filtra por activos (baja lógica) y por texto al mismo tiempo
@@ -40,10 +40,11 @@ const Proyectos = () => {
         <>
             <FormProyecto agregarProyecto={ manejarEnvio } />
 
-            {/* Buscador Dinámico */}
-            <div className="contenedor-buscador" style={{ margin: '20px 0', textAlign: 'center' }}>
+            {/* Buscador Dinámico (Migrado a HTML Semántico y Bootstrap) */}
+            <section className="contenedor-buscador my-4 d-flex justify-content-center px-3" style={{ textAlign: 'center' }}>
                 <input 
                     type="text"
+                    className="form-control text-center"
                     placeholder="Buscar proyecto por título..."
                     value={busqueda}
                     onChange={(e) => setBusqueda(e.target.value)}
@@ -51,12 +52,10 @@ const Proyectos = () => {
                         padding: '10px 15px', 
                         width: '100%', 
                         maxWidth: '400px', 
-                        borderRadius: '6px', 
-                        border: '1px solid #ccc',
                         fontSize: '16px'
                     }}
                 />
-            </div>
+            </section>
 
             {/* Le pasamos la lista ya filtrada */}
             <ListProject
